@@ -1,0 +1,39 @@
+# Dependencies and Package Managers
+node_modules/
+/dist
+/build
+backend/temp/
+
+# Environment files (Sensitive Credentials)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python compilation and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+pip-log.txt
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
