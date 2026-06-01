@@ -6,6 +6,17 @@ export function useVoice() {
 
   // Load mute state and sync with global navbar changes
   useEffect(() => {
+    // Force preloading of voices for speech synthesis (essential for Chrome/Safari/Edge)
+    const loadVoices = () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.getVoices()
+      }
+    }
+    loadVoices()
+    if (typeof window !== 'undefined' && window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices
+    }
+
     const checkMute = () => {
       const muteStatus = localStorage.getItem('sharmagpt_mute') === 'true'
       setIsMuted(muteStatus)
@@ -40,23 +51,28 @@ export function useVoice() {
     try {
       const utterance = new SpeechSynthesisUtterance(text)
       
-      // 2. Select en-IN/hi-IN voice if available
+      // 2. Select en-IN/hi-IN voice if available (case-insensitive and highly tolerant)
       const voices = window.speechSynthesis.getVoices()
-      const indianVoice = voices.find(
-        (voice) => 
-          voice.lang.includes('en-IN') || 
-          voice.lang.includes('hi-IN') || 
-          voice.name.includes('India') ||
-          voice.name.includes('Indian')
-      )
+      const indianVoice = voices.find((voice) => {
+        const lang = (voice.lang || '').toLowerCase()
+        const name = (voice.name || '').toLowerCase()
+        return (
+          lang.includes('en-in') || 
+          lang.includes('hi-in') || 
+          name.includes('india') ||
+          name.includes('indian') ||
+          name.includes('heera') ||
+          name.includes('ravi')
+        )
+      })
       
       if (indianVoice) {
         utterance.voice = indianVoice
       }
       
       // Motherly custom pacing and tone
-      utterance.rate = 0.85
-      utterance.pitch = 1.1
+      utterance.rate = 0.82 // Slightly slower for clear motherly diction
+      utterance.pitch = 1.15 // Slightly higher pitch for aunty expression
       
       utterance.onstart = () => setSpeaking(true)
       utterance.onend = () => setSpeaking(false)
@@ -76,3 +92,4 @@ export function useVoice() {
 
   return { speak, stop, speaking, isMuted }
 }
+

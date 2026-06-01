@@ -151,21 +151,41 @@ export default function SharmaAunty({ emotion = 'disappointed', size = 300 }) {
           <path d="M 80 230 Q 55 265 95 300" fill="none" stroke="#FFD600" strokeWidth="6" />
 
           {/* 3. Neck */}
-          <rect x="135" y="160" width="30" height="40" fill="#FFE3D1" stroke="#1A1A2E" strokeWidth="4" rx="5" />
+          <rect x="135" y="160" width="30" height="40" fill={state.faceColor} stroke="#1A1A2E" strokeWidth="4" rx="5" style={{ transition: 'fill 0.5s' }} />
           
-          {/* 4. BALDNESS FIX: Full Scalp Hair Backing */}
-          {/* Draws a black backing layer completely matching the skull size behind the face, so she never looks bald! */}
-          <circle cx="150" cy="120" r="66" fill="#111111" />
+          {/* 4. BALDNESS FIX: Full Scalp Hair Backing (Slightly larger ellipse for thick hair volume) */}
+          <ellipse cx="150" cy="118" rx="72" ry="68" fill="#111111" stroke="#1A1A2E" strokeWidth="4" />
 
           {/* 5. Face Base (Skin tone layered on top of hair backing) */}
           <circle cx="150" cy="122" r="62" fill={state.faceColor} stroke="#1A1A2E" strokeWidth="4" style={{ transition: 'fill 0.5s' }} />
 
-          {/* 6. Hair Parting & Traditional Hairstyle Frame (Layered on top of forehead skin) */}
-          {/* Symmetrical middle-parted slick hair framing her head cleanly down the forehead */}
-          <path d="M 88 120 C 88 72 212 72 212 120 C 180 84 120 84 88 120 Z" fill="#111111" stroke="#1A1A2E" strokeWidth="2" />
-          {/* Sassy hair strands wrapping the temples */}
-          <path d="M 88 115 Q 100 135 105 145" stroke="#1A1A2E" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M 212 115 Q 200 135 195 145" stroke="#1A1A2E" strokeWidth="3.5" strokeLinecap="round" />
+          {/* 6. Traditional Ears with Gold Jhumkas (Matching skin tone, positioned beautifully) */}
+          {/* Left Ear */}
+          <ellipse cx="86" cy="134" rx="8" ry="12" fill={state.faceColor} stroke="#1A1A2E" strokeWidth="3.5" style={{ transition: 'fill 0.5s' }} />
+          {/* Right Ear */}
+          <ellipse cx="214" cy="134" rx="8" ry="12" fill={state.faceColor} stroke="#1A1A2E" strokeWidth="3.5" style={{ transition: 'fill 0.5s' }} />
+
+          {/* Golden Jhumka Earrings */}
+          {/* Left Earring */}
+          <g>
+            <circle cx="86" cy="142" r="4" fill="#FFD600" stroke="#1A1A2E" strokeWidth="1.5" />
+            <line x1="86" y1="146" x2="86" y2="152" stroke="#FFD600" strokeWidth="2.5" />
+            <path d="M 80 162 C 80 152 92 152 92 162 Z" fill="#FFD600" stroke="#1A1A2E" strokeWidth="2" />
+            <circle cx="86" cy="165" r="2.5" fill="#FFD600" />
+          </g>
+          {/* Right Earring */}
+          <g>
+            <circle cx="214" cy="142" r="4" fill="#FFD600" stroke="#1A1A2E" strokeWidth="1.5" />
+            <line x1="214" y1="146" x2="214" y2="152" stroke="#FFD600" strokeWidth="2.5" />
+            <path d="M 208 162 C 208 152 220 152 220 162 Z" fill="#FFD600" stroke="#1A1A2E" strokeWidth="2" />
+            <circle cx="214" cy="165" r="2.5" fill="#FFD600" />
+          </g>
+
+          {/* 7. Middle-Parted Sleek Hair Frame (Drawn ON TOP of face base to cover the top/sides completely) */}
+          <path d="M 88 126 C 86 65 214 65 212 126 C 196 90 172 85 150 95 C 128 85 104 90 88 126 Z" fill="#111111" stroke="#1A1A2E" strokeWidth="3" />
+          {/* Sideburns/hair strands wrapping the cheeks for a stylish face framing */}
+          <path d="M 88 125 C 84 140 92 152 96 156" fill="none" stroke="#1A1A2E" strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M 212 125 C 216 140 208 152 204 156" fill="none" stroke="#1A1A2E" strokeWidth="3.5" strokeLinecap="round" />
           
           {/* 7. Cheeks Blush */}
           <circle cx="110" cy="142" r="12" fill="#FF5C8A" opacity={state.blush} style={{ transition: 'opacity 0.4s' }} />
