@@ -118,27 +118,27 @@ def generate_mock_roast(resume_data: Dict[str, Any]) -> Dict[str, Any]:
     
     overall_score = int((employability + resume_quality + project_strength) / 3)
     
-    # Determine chappal and emotion state
+    # Determine chappal, roast intensity, and emotion state
     if overall_score < 40:
         emotion_state = "nuclear"
+        roast_intensity = "Nuclear Sharma Aunty Mode"
         chappal_threat_level = 5
-        opening_line = f"Aiyyo, {name}! I opened this PDF and my blood pressure shot up faster than your grade point average!"
+        opening_line = f"Aiyyo, {name}! I opened this PDF and my blood pressure shot up faster than your grade point average! Absolutely nuclear level of disappointment!"
     elif overall_score < 60:
         emotion_state = "furious"
+        roast_intensity = "Emotional Damage"
         chappal_threat_level = 4
-        opening_line = f"Oh ho, {name}. What have you been doing for four years in college? Watching reels and copying repository URLs?"
+        opening_line = f"Oh ho, {name}. What have you been doing for four years in college? Watching reels and copying repository URLs? Massive emotional damage!"
     elif overall_score < 75:
         emotion_state = "disappointed"
+        roast_intensity = "Typical Sharma Aunty"
         chappal_threat_level = 3
-        opening_line = f"Beta {name}, I expected a resume, not an empty grocery shopping list. One eyebrow is raised."
-    elif overall_score < 85:
-        emotion_state = "suspicious"
-        chappal_threat_level = 2
-        opening_line = f"Hmm, {name}. Looks tidy, but these skills seem copy-pasted straight from a YouTube roadmap video."
+        opening_line = f"Beta {name}, I expected a resume, not an empty grocery shopping list. One eyebrow is raised in typical disappointment."
     else:
         emotion_state = "concerned"
-        chappal_threat_level = 1
-        opening_line = f"Accha beta, this is actually... not terrible? Let me check if you hired someone else to write this."
+        roast_intensity = "Mild Judgment"
+        chappal_threat_level = 2
+        opening_line = f"Accha beta, this is actually... not terrible? Let me check if you hired someone else to write this. Mild judgment remains."
 
     # Dynamic section analysis
     section_analyses = []
@@ -213,6 +213,58 @@ def generate_mock_roast(resume_data: Dict[str, Any]) -> Dict[str, Any]:
         {"question": "MBA or Masters karne ka plan kab hai?", "probability": 75 if overall_score < 75 else 50}
     ]
 
+    # Generate precisely 8 dynamic, highly specific mock memes tailored to user's flaws
+    memes = [
+        {
+            "template": "drake",
+            "top_text": "4 Udemy course certificates",
+            "bottom_text": "Bhai tera unique project kahan hai",
+            "damage_level": "Criminal"
+        },
+        {
+            "template": "distracted_boyfriend",
+            "top_text": "Me: watching 100th coding playlist",
+            "bottom_text": "Instead of compiling actual database tables",
+            "damage_level": "Brutal"
+        },
+        {
+            "template": "this_is_fine",
+            "top_text": "No projects and empty GitHub grid",
+            "bottom_text": "Writing 'Quick Learner' on resume",
+            "damage_level": "Call Police"
+        },
+        {
+            "template": "galaxy_brain",
+            "top_text": "Added 'Expert AI Engineer' to bio",
+            "bottom_text": "Bhai ne API key load ki bas",
+            "damage_level": "Brutal"
+        },
+        {
+            "template": "coffin_dance",
+            "top_text": "Recruiter asks for internship proof",
+            "bottom_text": "Aiyyo! Clean blank page in resume",
+            "damage_level": "Criminal"
+        },
+        {
+            "template": "gru_plan",
+            "top_text": "Listed 'Team player with leadership'",
+            "bottom_text": "Beta tu toh WhatsApp group mein mute hai",
+            "damage_level": "Mild"
+        },
+        {
+            "template": "woman_cat",
+            "top_text": "Recruiter: Show me deployed link",
+            "bottom_text": "Candidate: Runs on my localhost",
+            "damage_level": "Brutal"
+        },
+        {
+            "template": "sharma_aunty_custom",
+            "top_text": "Says 'Highly motivated to study'",
+            "bottom_text": "Beta, tu toh video games khelta hai",
+            "damage_level": "Brutal"
+        }
+    ]
+
     # Daily Recovery checklist
     recovery_plan = {
         "week1": [
@@ -245,6 +297,7 @@ def generate_mock_roast(resume_data: Dict[str, Any]) -> Dict[str, Any]:
 
     return {
         "overall_score": overall_score,
+        "roast_intensity": roast_intensity,
         "emotion_state": emotion_state,
         "opening_line": opening_line,
         "sections": section_analyses,
@@ -262,6 +315,7 @@ def generate_mock_roast(resume_data: Dict[str, Any]) -> Dict[str, Any]:
             "internship_readiness": internship_readiness,
             "portfolio_strength": portfolio_strength
         },
+        "memes": memes,
         "recovery_plan": recovery_plan,
         "closing_line": closing_line
     }

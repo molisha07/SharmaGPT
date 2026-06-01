@@ -65,7 +65,7 @@ export default function EmotionalDamageReport({ scores = {}, overallScore = 0 })
         </h3>
         
         {/* Radial gauge representation */}
-        <div className="relative w-48 h-48 mx-auto flex items-center justify-center mb-4">
+        <div className="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto flex items-center justify-center mb-4">
           <svg className="absolute w-full h-full transform -rotate-90" viewBox="0 0 100 100">
             {/* Outer track circle */}
             <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" strokeWidth="8" />
@@ -83,12 +83,12 @@ export default function EmotionalDamageReport({ scores = {}, overallScore = 0 })
           </svg>
           
           {/* Inner Counter Text */}
-          <div className="text-center z-10">
-            <span className="text-5xl font-black text-dark font-mono">
+          <div className="text-center z-10 p-2">
+            <span className="text-4xl sm:text-5xl font-black text-dark font-mono">
               <AnimatedCounter value={overallScore} />
             </span>
-            <span className="text-2xl font-black text-gray-400 font-mono">%</span>
-            <p className="text-xs uppercase font-extrabold text-gray-500 mt-0.5 tracking-wider">Overall Score</p>
+            <span className="text-xl sm:text-2xl font-black text-gray-400 font-mono">%</span>
+            <p className="text-[10px] sm:text-xs uppercase font-extrabold text-gray-500 mt-0.5 tracking-wider">Overall Score</p>
           </div>
         </div>
 

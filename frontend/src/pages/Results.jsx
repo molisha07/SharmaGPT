@@ -61,7 +61,7 @@ export default function Results() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* LEFT COLUMN: Sticky Aunty Avatar & Dramatic dialogue bubble */}
-        <div className="lg:col-span-4 sticky top-24 space-y-6">
+        <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6 w-full">
           <div className="duo-card bg-white p-6 flex flex-col items-center text-center">
             {/* The SVG Reactant Avatar */}
             <div className="hover:scale-102 transition-transform duration-300">
@@ -177,7 +177,7 @@ export default function Results() {
             )}
 
             {activeTab === 'memes' && (
-              <MemeDisplay memeUrls={report.meme_urls} />
+              <MemeDisplay memeUrls={report.meme_urls} initialMemes={report.memes} />
             )}
 
             {activeTab === 'certificate' && (
