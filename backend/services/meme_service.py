@@ -78,7 +78,7 @@ def draw_meme_canvas(template: str, top: str, bottom: str) -> str:
     If assets are missing, falls back cleanly to custom PIL flat vector illustrations.
     Returns the image encoded as a Base64 data URI string.
     """
-    assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+    assets_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
     
     # Resolve bold fonts for impact titles and bodies
     font_paths = ["impact.ttf", "arialbd.ttf", "arial.ttf"]
