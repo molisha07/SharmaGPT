@@ -4,24 +4,34 @@ export function useVoice() {
   const [isMuted, setIsMuted] = useState(false)
   const [speaking, setSpeaking] = useState(false)
 
+  const hasSpeechSupport = typeof window !== 'undefined' && !!window.speechSynthesis
+
   // Load mute state and sync with global navbar changes
   useEffect(() => {
+    if (!hasSpeechSupport) return
+
     // Force preloading of voices for speech synthesis (essential for Chrome/Safari/Edge)
     const loadVoices = () => {
-      if (typeof window !== 'undefined' && window.speechSynthesis) {
-        window.speechSynthesis.getVoices()
+      if (window.speechSynthesis) {
+        try {
+          window.speechSynthesis.getVoices()
+        } catch (e) {
+          console.warn("Failed to get voices:", e)
+        }
       }
     }
     loadVoices()
-    if (typeof window !== 'undefined' && window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
+    if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
       window.speechSynthesis.onvoiceschanged = loadVoices
     }
 
     const checkMute = () => {
       const muteStatus = localStorage.getItem('sharmagpt_mute') === 'true'
       setIsMuted(muteStatus)
-      if (muteStatus) {
-        window.speechSynthesis.cancel()
+      if (muteStatus && window.speechSynthesis) {
+        try {
+          window.speechSynthesis.cancel()
+        } catch (e) {}
         setSpeaking(false)
       }
     }
@@ -31,28 +41,40 @@ export function useVoice() {
     
     // Periodically sync speaking state
     const interval = setInterval(() => {
-      setSpeaking(window.speechSynthesis.speaking)
+      if (window.speechSynthesis) {
+        try {
+          setSpeaking(window.speechSynthesis.speaking)
+        } catch (e) {
+          setSpeaking(false)
+        }
+      }
     }, 500)
 
     return () => {
       window.removeEventListener('sharmagpt_mute_changed', checkMute)
       clearInterval(interval)
-      window.speechSynthesis.cancel()
+      if (window.speechSynthesis) {
+        try {
+          window.speechSynthesis.cancel()
+        } catch (e) {}
+      }
     }
-  }, [])
+  }, [hasSpeechSupport])
 
   const speak = (text) => {
-    // 1. Cancel ongoing speeches
-    window.speechSynthesis.cancel()
-    
-    const muteStatus = localStorage.getItem('sharmagpt_mute') === 'true'
-    if (muteStatus || !text) return
+    if (!hasSpeechSupport || !text) return
 
     try {
+      // 1. Cancel ongoing speeches safely
+      window.speechSynthesis.cancel()
+      
+      const muteStatus = localStorage.getItem('sharmagpt_mute') === 'true'
+      if (muteStatus) return
+
       const utterance = new SpeechSynthesisUtterance(text)
       
       // 2. Select en-IN/hi-IN voice if available (case-insensitive and highly tolerant)
-      const voices = window.speechSynthesis.getVoices()
+      const voices = window.speechSynthesis.getVoices() || []
       const indianVoice = voices.find((voice) => {
         const lang = (voice.lang || '').toLowerCase()
         const name = (voice.name || '').toLowerCase()
@@ -86,10 +108,15 @@ export function useVoice() {
   }
 
   const stop = () => {
-    window.speechSynthesis.cancel()
+    if (hasSpeechSupport && window.speechSynthesis) {
+      try {
+        window.speechSynthesis.cancel()
+      } catch (e) {}
+    }
     setSpeaking(false)
   }
 
   return { speak, stop, speaking, isMuted }
 }
+
 

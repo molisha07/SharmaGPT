@@ -168,7 +168,7 @@ export default function MemeDisplay({ memeUrls = [], initialMemes = [] }) {
                   {/* Visual Header card info */}
                   <div className="flex justify-between items-center border-b-2 border-dark pb-2">
                     <span className="text-[10px] font-mono font-black text-gray-400 uppercase tracking-widest">
-                      Template: {item.template.replace('_', ' ')}
+                      Template: {(item.template || 'sharma_aunty_custom').replace('_', ' ')}
                     </span>
                     
                     <span className={`px-2.5 py-0.5 border text-[10px] font-black uppercase rounded-full ${getBadgeStyle(item.damage_level)}`}>
