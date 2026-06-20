@@ -28,12 +28,6 @@ class FamilyQuestion(BaseModel):
     question: str = Field(description="A typical dynamic question e.g., 'Beta package kitna hai?'")
     probability: int = Field(description="Percentage probability (0-100) of being asked")
 
-class MemeItem(BaseModel):
-    template: str = Field(description="Meme template name: drake | distracted_boyfriend | this_is_fine | galaxy_brain | coffin_dance | gru_plan | woman_cat | sharma_aunty_custom")
-    top_text: str = Field(description="Setup delusion caption")
-    bottom_text: str = Field(description="Brutal reality punchline caption")
-    damage_level: str = Field(description="💀 Damage level rating: Mild | Brutal | Criminal | Call Police")
-
 class RecoveryPlan(BaseModel):
     week1: List[str] = Field(description="Week 1: Resume cleanup daily tasks (5 items)")
     week2: List[str] = Field(description="Week 2: Project building checklist (3 items)")
@@ -42,7 +36,6 @@ class RecoveryPlan(BaseModel):
 
 class AnalysisResult(BaseModel):
     overall_score: int
-    roast_intensity: str = Field(description="'Mild Judgment' | 'Typical Sharma Aunty' | 'Emotional Damage' | 'Nuclear Sharma Aunty Mode'")
     emotion_state: str = Field(description="'happy' | 'concerned' | 'suspicious' | 'disappointed' | 'furious' | 'nuclear'")
     opening_line: str
     sections: List[SectionAnalysis]
@@ -52,6 +45,5 @@ class AnalysisResult(BaseModel):
     tutorial_syndrome_detected: bool
     chappal_threat_level: int = Field(description="1 to 5 level of threat")
     scores: ScoreBreakdown
-    memes: List[MemeItem]
     recovery_plan: RecoveryPlan
     closing_line: str

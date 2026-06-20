@@ -20,7 +20,7 @@ export default function ResumeDropzone({ onFileSelect }) {
     setError('')
     if (!selectedFile) return
 
-    const ext = selectedFile.name.split('.').pop().lowerCase || selectedFile.name.split('.').pop().toLowerCase()
+    const ext = selectedFile.name.split('.').pop().toLowerCase()
     if (ext !== 'pdf' && ext !== 'docx') {
       setError('Sigh! Sharma Aunty only accepts PDF or DOCX resume formats.')
       return

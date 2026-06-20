@@ -59,27 +59,9 @@ async def analyze_resume(
         # 5. Run the AI Roaster
         roast_report = analyze_resume_with_ai(resume_data)
         
-        # 6. Generate Pillow Memes on the fly based on the structured meme data
-        # Ensure we have a memes list
-        if "memes" not in roast_report:
-            # Fallback mock generator returns memes inside results already, but double-check
-            roast_report["memes"] = []
-            
-        # Draw and inject the Pillow images
-        from backend.services.meme_service import draw_meme_canvas
-        flat_urls = []
-        for item in roast_report["memes"]:
-            try:
-                top = item.get("top_text", "Delusion")
-                bottom = item.get("bottom_text", "Reality")
-                tpl = item.get("template", "sharma_aunty_custom")
-                img_url = draw_meme_canvas(tpl, top, bottom)
-                item["meme_url"] = img_url
-                flat_urls.append(img_url)
-            except Exception as ex:
-                logger.error(f"Error drawing meme: {ex}")
-                
-        roast_report["meme_urls"] = flat_urls
+        # 6. Generate Pillow Memes on the fly based on the roast results
+        meme_urls = select_and_generate_memes(roast_report)
+        roast_report["meme_urls"] = meme_urls
         roast_report["fileName"] = file.filename
         
         return roast_report

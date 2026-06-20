@@ -17,8 +17,8 @@ export default function Login() {
     e.preventDefault()
     setError('')
 
-    const finalName = name.strip || name.trim() || 'Beta'
-    const finalEmail = email.strip || email.trim()
+    const finalName = name.trim() || 'Beta'
+    const finalEmail = email.trim()
 
     if (!finalEmail) {
       setError('Please provide an email address, beta.')

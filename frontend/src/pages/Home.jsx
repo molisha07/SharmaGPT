@@ -51,7 +51,7 @@ export default function Home() {
             <FaBolt className="animate-pulse" /> AI Character Experience
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-black leading-tight tracking-tight text-dark">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-black leading-tight tracking-tight text-dark">
             Upload Your Resume.<br />
             Face The <span className="text-primary underline decoration-yellow-400 decoration-8">Disappointment.</span>
           </h1>

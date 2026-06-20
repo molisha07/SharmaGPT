@@ -32,8 +32,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Animated Brand Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="text-3xl sm:text-4xl select-none group-hover:animate-wiggle inline-block">🩴</span>
-          <span className="font-display text-2xl sm:text-3xl tracking-tight text-primary font-extrabold group-hover:text-dark transition-colors">
+          <span className="text-2xl sm:text-4xl select-none group-hover:animate-wiggle inline-block">🩴</span>
+          <span className="font-display text-xl sm:text-3xl tracking-tight text-primary font-extrabold group-hover:text-dark transition-colors">
             Sharma<span className="text-dark group-hover:text-primary">GPT</span>™
           </span>
         </Link>
